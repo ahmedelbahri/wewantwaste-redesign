@@ -17,7 +17,6 @@ This project is a full redesign of the “Choose your skip size” page from [we
 - **Preserve functionality**: skip selection, pricing, etc.
 - **Use live data** from: https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft
 
-  
 ---
 
 ## 🧠 Approach
@@ -48,28 +47,31 @@ This project is a full redesign of the “Choose your skip size” page from [we
 
 ## 📱 Responsiveness
 
-| Device | Status |
-|--------|--------|
-| Mobile | ✅ |
-| Tablet | ✅ |
-| Desktop | ✅ |
+| Device  | Status |
+| ------- | ------ |
+| Mobile  | ✅     |
+| Tablet  | ✅     |
+| Desktop | ✅     |
 
 ---
 
 ## 📦 Setup Instructions
 
 1. Clone this repo:
- ```bash
- git clone https://github.com/your-username/wewantwaste-redesign.git
- cd wewantwaste-redesign
+
+```bash
+git clone https://github.com/your-username/wewantwaste-redesign.git
+cd wewantwaste-redesign
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Run locally:
+
 ```bash
 pnpm run dev
 ```
