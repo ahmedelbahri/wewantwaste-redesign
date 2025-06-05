@@ -1,4 +1,6 @@
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { SelectorContext } from "@/hooks/selector-context";
+import { useContext } from "react";
 
 interface ThreeDCardProps {
   title: string;
@@ -8,6 +10,7 @@ interface ThreeDCardProps {
   buttonText: string;
   imageAlt: string;
   vat: string;
+  id: number;
 }
 
 export function ThreeDCard({
@@ -18,7 +21,10 @@ export function ThreeDCard({
   buttonText,
   imageAlt,
   vat,
+  id,
 }: ThreeDCardProps) {
+  const context = useContext(SelectorContext);
+
   return (
     <CardContainer className="inter-var cursor-pointer">
       <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -59,6 +65,7 @@ export function ThreeDCard({
           <CardItem
             translateZ={30}
             as="button"
+            onClick={() => context.setSelectedSkip(id)}
             className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-400"
           >
             {buttonText}
