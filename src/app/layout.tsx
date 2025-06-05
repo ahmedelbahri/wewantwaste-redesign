@@ -4,15 +4,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="max-w-screen-xl m-auto container">
       <div className="">
-        <div className="flex min-h-screen flex-col items-center justify-center">
-          <div className="text-right w-full p-3">
-            <ModeToggle />
-          </div>
-          <div className="flex min-h-[calc(100vh-36px-24px)] flex-row flex-wrap gap-x-10 items-center justify-evenly">
-            {children}
-          </div>
+        <div className="text-right w-full p-3 flex justify-between">
+          <img
+            src="/rem_waste_management_logo.svg"
+            alt="Logo"
+            width={36}
+            height={36}
+          />
+          <ModeToggle />
         </div>
       </div>
+      <div className="min-h-[calc(100vh-36px-24px)] w-full">{children}</div>
     </div>
   );
 };
