@@ -6,9 +6,11 @@ import { getSkipByLocation } from "@/api/skips-by-location";
 import { useContext, useEffect, useState } from "react";
 import { SelectorContext } from "@/lib/selector-context";
 import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "motion/react";
+import Confetti from "react-confetti";
+import { toast } from "sonner";
 
 import type { Skips } from "@/types/skips";
-import { AnimatePresence, motion } from "motion/react";
 
 function App() {
   const queryParams = {
@@ -17,6 +19,9 @@ function App() {
   };
 
   const [selectedSkip, setSelectedSkip] = useState<Skips | undefined>();
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+  const [counter, setCounter] = useState(6);
 
   const { isPending, isError, data } = useQuery({
     queryKey: ["skips", queryParams],
@@ -28,6 +33,45 @@ function App() {
   useEffect(() => {
     setSelectedSkip(data?.find((s) => s.id === context.selectedSkip));
   }, [context, data, selectedSkip]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  function fireReload() {
+    const toastId = toast.success(
+      `Succesfull workflow! Refreshing in ${counter - 1} seconds`,
+      {
+        duration: Infinity,
+      }
+    );
+
+    const interval = setInterval(() => {
+      setCounter((prev) => {
+        const next = prev - 1;
+        toast.success(`Succesfull workflow! Refreshing in ${next} seconds`, {
+          id: toastId, // update existing toast
+          duration: Infinity,
+        });
+        if (next <= 0) {
+          toast.success("Reloading now!");
+          window.location.reload();
+        }
+        if (next <= 0) clearInterval(interval);
+        return next;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }
 
   return (
     <Layout>
@@ -102,13 +146,17 @@ function App() {
               >
                 Clear
               </Button>
-              <Button className="flex items-center gap-2 cursor-pointer">
+              <Button
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => fireReload()}
+              >
                 Continue
               </Button>
             </div>
           </div>
         </div>
       </div>
+      {counter <= 5 && <Confetti width={width - 15} height={height} />}
     </Layout>
   );
 }

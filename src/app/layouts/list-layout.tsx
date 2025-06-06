@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, useContext } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { CircleCheck } from "lucide-react";
+import { CircleAlert, CircleCheck } from "lucide-react";
 import { SelectorContext } from "@/lib/selector-context";
 
 import type { Skips } from "@/types/skips";
@@ -95,7 +95,7 @@ export default function ExpandableCardDemo({
               </motion.div>
 
               <div>
-                <div className="flex justify-between items-start p-4">
+                <div className="flex justify-between items-start px-4 pt-4 pb-2">
                   <div className="">
                     <motion.h3
                       layoutId={`title-${active.id}-${id}`}
@@ -140,7 +140,7 @@ export default function ExpandableCardDemo({
                     </motion.div>
                   </div>
                 </div>
-                <div className="pt-4 relative px-4">
+                <div className=" relative px-4">
                   <motion.div
                     layout
                     initial={{ opacity: 0 }}
@@ -148,6 +148,22 @@ export default function ExpandableCardDemo({
                     exit={{ opacity: 0 }}
                     className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
                   >
+                    {(active.allowed_on_road == false ||
+                      active.allows_heavy_waste == false) && (
+                      <div className=" text-yellow-500 flex justify items-center gap-2">
+                        <CircleAlert />
+                        <span className="text-xs font-semibold">Warning:</span>
+                        <span className="text-xs font-normal">
+                          This skip is not suitable for{" "}
+                          {!active.allowed_on_road ? "on-road" : ""}{" "}
+                          {!active.allowed_on_road && !active.allows_heavy_waste
+                            ? "and "
+                            : ""}
+                          {!active.allows_heavy_waste ? "heavy waste" : ""}{" "}
+                          disposal.
+                        </span>
+                      </div>
+                    )}
                     <div className="space-y-2">
                       <p>
                         <strong>Area:</strong> {active.area}
@@ -220,7 +236,12 @@ export default function ExpandableCardDemo({
                     layoutId={`title-${card.id}-${id}`}
                     className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left"
                   >
-                    {card.size} Yard Skip
+                    <span className="flex gap-2 ">
+                      {card.size} Yard Skip{" "}
+                      {!card.allowed_on_road || !card.allows_heavy_waste ? (
+                        <CircleAlert className="text-yellow-600" />
+                      ) : null}
+                    </span>
                   </motion.h3>
                   <motion.p
                     layoutId={`description-${card.id}-${id}`}

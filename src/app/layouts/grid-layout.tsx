@@ -22,6 +22,8 @@ function GridLayout({ data }: GridLayoutProps) {
             buttonText="Select"
             buttonClickedText="Selected"
             imageAlt="thumbnail"
+            allowedOnRoad={skip.allowed_on_road}
+            allowsHeavyWaste={skip.allows_heavy_waste}
           />
         ))}
     </div>

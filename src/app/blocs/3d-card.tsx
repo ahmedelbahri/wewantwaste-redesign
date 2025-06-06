@@ -1,6 +1,7 @@
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { SelectorContext } from "@/lib/selector-context";
 import { useContext } from "react";
+import { CircleAlert } from "lucide-react";
 
 interface ThreeDCardProps {
   title: string;
@@ -12,6 +13,8 @@ interface ThreeDCardProps {
   imageAlt: string;
   vat: string;
   id: number;
+  allowedOnRoad: boolean;
+  allowsHeavyWaste: boolean;
 }
 
 export function ThreeDCard({
@@ -24,6 +27,8 @@ export function ThreeDCard({
   imageAlt,
   vat,
   id,
+  allowedOnRoad,
+  allowsHeavyWaste,
 }: ThreeDCardProps) {
   const context = useContext(SelectorContext);
 
@@ -59,6 +64,18 @@ export function ThreeDCard({
               className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
               alt={imageAlt}
             />
+            {(allowedOnRoad == false || allowsHeavyWaste == false) && (
+              <div className="pt-2 absolute text-yellow-500 flex justify items-center gap-2">
+                <CircleAlert />
+                <span className="text-xs font-semibold">Warning:</span>
+                <span className="text-xs font-normal">
+                  This skip is not suitable for{" "}
+                  {!allowedOnRoad ? "on-road" : ""}{" "}
+                  {!allowedOnRoad && !allowsHeavyWaste ? "and " : ""}
+                  {!allowsHeavyWaste ? "heavy waste" : ""} disposal.
+                </span>
+              </div>
+            )}
           </CardItem>
           <div className="flex justify-between items-center mt-15">
             <CardItem
