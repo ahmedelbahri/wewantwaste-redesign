@@ -6,8 +6,8 @@ This project is a full redesign of the “Choose your skip size” page from [we
 
 ## 🚀 Live Preview
 
-👉 [Live Demo](https://your-sandbox-link-here)  
-👉 [GitHub Repo](https://github.com/your-username/wewantwaste-redesign)
+👉 [Live Demo](https://codesandbox.io/p/github/ahmedelbahri/wewantwaste-redesign)  
+👉 [GitHub Repo](https://github.com/ahmedelbahri/wewantwaste-redesign)
 
 ---
 
@@ -16,6 +16,18 @@ This project is a full redesign of the “Choose your skip size” page from [we
 - **Redesign** the "Choose your skip size" page.
 - **Preserve functionality**: skip selection, pricing, etc.
 - **Use live data** from: https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft
+
+---
+
+## 🛠️ Tools used
+
+- React (TS)
+- Tanstack useQuerry
+- useContext for state management (did not feel the need to go for redux)
+- Tailwind CSS
+- FrameMotion (css aniation library)
+- pnpm package manager instead of npm
+
 
 ---
 
@@ -38,7 +50,7 @@ This project is a full redesign of the “Choose your skip size” page from [we
 ### 🧩 Architecture
 
 - `App.jsx`: Entry point
-- `components/SkipSelector.jsx`: Core skip display logic
+- `components/3d-card.jsx`: Core skip display logic
 - `components/SkipCard.jsx`: Reusable UI component for each skip
 - `services/api.js`: API logic separated from UI
 - `styles/`: Global styles (optional override)
@@ -60,7 +72,7 @@ This project is a full redesign of the “Choose your skip size” page from [we
 1. Clone this repo:
 
 ```bash
-git clone https://github.com/your-username/wewantwaste-redesign.git
+git clone https://github.com/ahmedelbahri/wewantwaste-redesign.git
 cd wewantwaste-redesign
 ```
 
@@ -93,6 +105,8 @@ pnpm run dev
 ---
 
 ## 📩 Contact
+
+- Email: work@ahmedelbahri.com
 
 For questions or improvements, feel free to reach out or fork the repo.
 
