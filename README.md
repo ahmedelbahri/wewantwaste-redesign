@@ -96,17 +96,9 @@ pnpm run dev
 - Graceful loading and error states
 - Clean, modular codebase
 
-## 🧪 Future Improvements
-
-- Add skip filtering/sorting
-- Accessibility enhancements (ARIA, keyboard nav)
-- Test coverage (Jest + React Testing Library)
-
 ---
 
 ## 📩 Contact
-
-- Email: work@ahmedelbahri.com
 
 For questions or improvements, feel free to reach out or fork the repo.
 
