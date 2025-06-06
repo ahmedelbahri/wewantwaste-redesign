@@ -19,18 +19,6 @@ This project is a full redesign of the “Choose your skip size” page from [we
 
 ---
 
-## 🛠️ Tools used
-
-- React (TS)
-- Tanstack useQuerry
-- useContext for state management (did not feel the need to go for redux)
-- Tailwind CSS
-- FrameMotion (css aniation library)
-- pnpm package manager instead of npm
-
-
----
-
 ## 🧠 Approach
 
 ### 💻 UI/UX Strategy
@@ -44,8 +32,10 @@ This project is a full redesign of the “Choose your skip size” page from [we
 
 - **React (Vite)** for a fast development setup
 - **Tailwind CSS** for utility-first responsive design
-- **Axios** for clean data fetching
+- **Tanstack useQuerry**, **Axios** for clean data fetching
 - **React Hooks** to manage component state and side-effects
+- **Framer Motion** for declarative animations  
+- **React Context API** for lightweight global state management (did not feel the need to go for redux)
 
 ### 🧩 Architecture
 
