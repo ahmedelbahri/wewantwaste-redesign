@@ -1,38 +1,14 @@
 import Layout from "@/app/layout";
-import { ThreeDCard } from "@/app/blocs/3d-card";
+import ListLayout from "@/app/layouts/list-layout";
+import GridLayout from "@/app/layouts/grid-layout";
 import { useQuery } from "@tanstack/react-query";
 import { getSkipByLocation } from "@/api/skips-by-location";
 import { useContext, useEffect, useState } from "react";
-import { SelectorContext } from "@/hooks/selector-context";
+import { SelectorContext } from "@/lib/selector-context";
 import { Button } from "@/components/ui/button";
 
 import type { Skips } from "@/types/skips";
-
-// function MobileLayout() {
-//   return (
-//     <div className="flex min-h-screen flex-col items-center justify-center">
-//       <div className="text-right w-full p-3">
-//         <Button variant="secondary">Back</Button>
-//       </div>
-//       <div className="flex min-h-[calc(100vh-36px-24px)] flex-col items-center justify-center">
-//         <p className="text-lg font-bold">Mobile Layout</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// function DesktopLayout() {
-//   return (
-//     <div className="flex min-h-screen flex-col items-center justify-center">
-//       <div className="text-right w-full p-3">
-//         <Button variant="secondary">Back</Button>
-//       </div>
-//       <div className="flex min-h-[calc(100vh-36px-24px)] flex-col items-center justify-center">
-//         <p className="text-lg font-bold">Desktop Layout</p>
-//       </div>
-//     </div>
-//   );
-// }
+import { AnimatePresence, motion } from "motion/react";
 
 function App() {
   const queryParams = {
@@ -50,37 +26,42 @@ function App() {
   const context = useContext(SelectorContext);
 
   useEffect(() => {
-    console.log(selectedSkip, "dsf");
     setSelectedSkip(data?.find((s) => s.id === context.selectedSkip));
   }, [context, data, selectedSkip]);
 
   return (
     <Layout>
-      <div className="grid lg:grid-cols-2 gap-4 md:gap-12 max-w-5xl m-auto pb-45 sm:pb-36">
-        {isPending && (
-          <div className="flex justify-center items-center">Loading...</div>
+      {isPending && (
+        <div className="flex justify-center items-center">Loading...</div>
+      )}
+      {isError && (
+        <div className="flex justify-center items-center">
+          Error: Failed to fetch try to refresh
+        </div>
+      )}
+      <AnimatePresence mode="wait">
+        {context.isGridMode ? (
+          <motion.div
+            key="grid"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <GridLayout {...{ data, selectedSkip }} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="list"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ListLayout {...{ data, selectedSkip }} />
+          </motion.div>
         )}
-        {isError && (
-          <div className="flex justify-center items-center">
-            Error: Failed to fetch try to refresh
-          </div>
-        )}
-        {data &&
-          data.map((skip) => (
-            <ThreeDCard
-              id={skip.id}
-              key={skip.id}
-              title={skip.size.toString() + " Yard Skip"}
-              description={skip.hire_period_days + " days hire period"}
-              price={`${skip.price_before_vat} £`}
-              vat={`VAT ${skip.vat} £`}
-              imageUrl={`https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${skip.size}-yarder-skip.jpg`}
-              buttonText="Select"
-              buttonClickedText="Selected"
-              imageAlt="thumbnail"
-            />
-          ))}
-      </div>
+      </AnimatePresence>
       <div
         className={`fixed bottom-0 left-0 right-0 bg-stone-900 border-t border-gray-700 z-50 transition-opacity duration-300 ease-in-out ${selectedSkip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"}`}
       >
@@ -93,21 +74,37 @@ function App() {
           <div className="lg:flex items-center justify-between">
             <div className="flex items-center gap-6 justify-center">
               <div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-gray-400 whitespace-nowrap">
                   <span className="text-green-700">{selectedSkip?.size}</span>{" "}
                   Yard Skip
                 </p>
               </div>
               <div>
-                <span className="text-2xl font-bold text-green-500">
-                  £{selectedSkip?.price_before_vat}
+                <span className="text-2xl font-bold text-green-500 whitespace-nowrap">
+                  £
+                  {(selectedSkip?.price_before_vat || 0) +
+                    (selectedSkip?.vat || 0)}{" "}
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                    Including VAT
+                  </span>
                 </span>
-                <span className="text-sm text-gray-400 ml-2">14 day hire</span>
+                &nbsp; &nbsp; &nbsp;
+                <span className="text-sm text-gray-400 ml-2 whitespace-nowrap">
+                  14 day hire
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-4 justify-end">
-              <Button variant="secondary">Back</Button>
-              <Button className="flex items-center gap-2">Continue</Button>
+              <Button
+                className="cursor-pointer"
+                variant="secondary"
+                onClick={() => context.setSelectedSkip(NaN)}
+              >
+                Clear
+              </Button>
+              <Button className="flex items-center gap-2 cursor-pointer">
+                Continue
+              </Button>
             </div>
           </div>
         </div>

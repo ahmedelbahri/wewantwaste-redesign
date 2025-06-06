@@ -1,5 +1,5 @@
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { SelectorContext } from "@/hooks/selector-context";
+import { SelectorContext } from "@/lib/selector-context";
 import { useContext } from "react";
 
 interface ThreeDCardProps {
