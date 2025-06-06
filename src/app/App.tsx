@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "motion/react";
 import Confetti from "react-confetti";
 import { toast } from "sonner";
+import { OctagonX } from "lucide-react";
+import { Spinner } from "@/components/spinner";
 
 import type { Skips } from "@/types/skips";
 
@@ -76,11 +78,14 @@ function App() {
   return (
     <Layout>
       {isPending && (
-        <div className="flex justify-center items-center">Loading...</div>
+        <div className="min-h-[inherit] flex justify-center items-center">
+          <Spinner />
+        </div>
       )}
       {isError && (
-        <div className="flex justify-center items-center">
-          Error: Failed to fetch try to refresh
+        <div className="min-h-[inherit] flex justify-center items-center">
+          <OctagonX />
+          &nbsp; Error: Failed to fetch try to refresh
         </div>
       )}
       <AnimatePresence mode="wait">
@@ -107,7 +112,7 @@ function App() {
         )}
       </AnimatePresence>
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-stone-900 border-t border-gray-700 z-50 transition-opacity duration-300 ease-in-out ${selectedSkip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"}`}
+        className={`fixed bottom-0 left-0 right-0 bg-gray-50 dark:bg-stone-900 border-t border-gray-200 dark:border-gray-700 z-50 transition-opacity duration-300 ease-in-out ${selectedSkip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"}`}
       >
         <div className="max-w-screen-xl m-auto p-4">
           <div className="mb-3 text-xs text-gray-400 text-center leading-snug">

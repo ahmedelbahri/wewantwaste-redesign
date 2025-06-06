@@ -239,7 +239,7 @@ export default function ExpandableCardDemo({
                     <span className="flex gap-2 ">
                       {card.size} Yard Skip{" "}
                       {!card.allowed_on_road || !card.allows_heavy_waste ? (
-                        <CircleAlert className="text-yellow-600" />
+                        <CircleAlert className="text-yellow-500" />
                       ) : null}
                     </span>
                   </motion.h3>
