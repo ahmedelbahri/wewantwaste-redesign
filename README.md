@@ -6,7 +6,8 @@ This project is a full redesign of the “Choose your skip size” page from [we
 
 ## 🚀 Live Preview
 
-👉 [Live Demo](https://codesandbox.io/p/github/ahmedelbahri/wewantwaste-redesign)  
+👉 [Live Demo](https://jffjnh-5173.csb.app/)  
+👉 [CodeSandBox Repo](https://codesandbox.io/p/github/ahmedelbahri/wewantwaste-redesign)  
 👉 [GitHub Repo](https://github.com/ahmedelbahri/wewantwaste-redesign)
 
 ---
