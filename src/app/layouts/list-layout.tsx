@@ -87,7 +87,7 @@ export default function ExpandableCardDemo({
               <motion.div layoutId={`image-${active.id}-${id}`}>
                 <div className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg bg-gradient-to-br flex items-center justify-center">
                   <img
-                    src={`https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${active.size}-yarder-skip.jpg`}
+                    src={`img/${active.size}-Yard-skip.jpg`}
                     alt={`${active.size} Yard Skip`}
                     className="h-full w-full object-cover rounded-t-xl group-hover/card:shadow-xl"
                   />
@@ -225,7 +225,7 @@ export default function ExpandableCardDemo({
                 <motion.div layoutId={`image-${card.id}-${id}`}>
                   <div className="h-40 w-40 md:h-14 md:w-14 rounded-lg bg-gradient-to-br flex items-center justify-center">
                     <img
-                      src={`https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${card.size}-yarder-skip.jpg`}
+                      src={`img/${card.size}-Yard-skip.jpg`}
                       className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
                       alt={card.size + " Yard Skip"}
                     />

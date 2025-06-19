@@ -18,7 +18,7 @@ function GridLayout({ data }: GridLayoutProps) {
             description={skip.hire_period_days + " days hire period"}
             price={`£${skip.price_before_vat}`}
             vat={`£${skip.vat} VAT`}
-            imageUrl={`https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${skip.size}-yarder-skip.jpg`}
+            imageUrl={`img/${skip.size}-Yard-skip.jpg`}
             buttonText="Select"
             buttonClickedText="Selected"
             imageAlt="thumbnail"
